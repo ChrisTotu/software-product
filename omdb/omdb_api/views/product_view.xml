@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- inherit product_template_form_view view -->
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.form.view.inherit (in omdb_api)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_information']" position="before">
+                <page string="Film OMDB">
+                    <group>
+                        <group name="group_general">
+                            <field name="year"/>
+                            <field name="run_time"/>
+                            <field name="meta_score_display"/>
+                            <field name="actors"/>
+                        </group>
+                        <group name="group_standard_price">
+                            <label for="list_price"/>
+                            <div name="pricing" class="o_row">
+                                <field name="list_price" class="oe_inline" widget='monetary'
+                                options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            </div>
+                            <field name="categ_id" string="Categorie(s)"/>
+                        </group>
+                    </group>
+                    <group string="Internal Notes">
+                        <field colspan="2" name="description" nolabel="1" placeholder="Résumé."/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- inherit product_template_only_form_view pour enlever le bar code-->
+    <record id="product_template_only_form_view" model="ir.ui.view">
+        <field name="name">product.template.only.form.view.inherit (in omdb_api)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='barcode']" position="replace"/>
+        </field>
+    </record>
+</odoo>
